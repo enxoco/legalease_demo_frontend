@@ -36,6 +36,7 @@ function App() {
     const data = await response.json()
     setQueries(data)
     fetchResults(1)
+    setSearchTerm('')
   }
 
   const fetchPrevResult = async (term) => {
@@ -70,11 +71,14 @@ function App() {
       <Box textAlign="center" fontSize="xl" display="flex" justifyContent="center" alignItems="center" flexDirection="column" maxW="50vw" margin="100px auto">
         <Box display="flex" justifyContent="space-between" width="85%">
         <VStack spacing={8}>
-            <FormControl width="300">
+          <Box as="form">
+          <FormControl width="300">
               <FormLabel htmlFor='search'>Enter Search Term</FormLabel>
-              <Input id='search' type='text' defaultValue={searchTerm} onChange={handleSearchTermInput} width="300" />
-              <Button ml={5} onClick={fetchSearchResult} isLoading={isLoading} >Search</Button>
+              <Input id='search' type='text' value={searchTerm} onChange={handleSearchTermInput} width="300" />
+              <Button type="submit" ml={5} onClick={fetchSearchResult} isLoading={isLoading} >Search</Button>
             </FormControl>
+          </Box>
+
           </VStack>
           <ColorModeSwitcher justifySelf="flex-end"  />
 
